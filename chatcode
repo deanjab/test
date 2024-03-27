@@ -1,0 +1,21 @@
+import pandas as pd
+
+
+def best(data):
+    df = data.copy()
+    sums_by_name = df.groupby('name').sum()
+    max_sum = sums_by_name.sum(axis=1)  # Индекс строки с максимальной суммой
+    max_sum_row = df[df['name'] == max_sum]  # Выбор строки с максимальной суммой
+    return max_sum_row
+
+columns = ['name', 'maths', 'physics', 'computer science']
+data = {
+    'name': ['Иванов', 'Петров', 'Сидоров', 'Васечкин', 'Николаев'],
+    'maths': [5, 4, 5, 2, 4],
+    'physics': [4, 4, 4, 5, 5],
+    'computer science': [5, 2, 5, 4, 3]
+}
+journal = pd.DataFrame(data, columns=columns)
+filtered = best(journal)
+print(journal)
+print(filtered)
